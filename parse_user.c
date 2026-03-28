@@ -44,10 +44,8 @@ int	read_user(int limit)
 	int		input;
 	int		i;
 	int		fd;
-	int		start;
 
 	i = 0;
-	start = i;
 	n = 1;
 	fd = open("/dev/tty", O_RDONLY);
 	while(n > 0)

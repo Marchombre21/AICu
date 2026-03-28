@@ -13,10 +13,12 @@ FINCLUDE := -I $(INCLUDE)
 DEPFLAGS := -MMD -MP -g3
 
 SRC_FILES := main.c\
-	parsing.c\
 	vectors.c\
-	algo.c\
+	parsing.c\
 	parse_user.c\
+	algo.c\
+	algo_utils.c\
+	display_terminal.c
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 DEPS := $(patsubst %.o, %.d, $(OBJ))
