@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   aicu.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/28 07:08:49 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 07:34:26 by bfitte           ###   ########lyon.fr   */
+/*   Created: 2026/03/28 07:35:48 by bfitte            #+#    #+#             */
+/*   Updated: 2026/03/28 10:15:24 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
+#ifndef AICU_H
+# define AICU_H
 
-# include <stdlib.h>
+#include <stdint.h>
+#include <unistd.h>
+#include "vector.h"
 
-typedef struct s_vector
-{
-	size_t	element_size;
-	size_t	num_elements;
-	size_t	max_elements;
-	int	*data;
-}				t_vector;
+int	read_pro_max(t_vector *vec);
 
-int		vector_realloc(t_vector *vector);
-int		vector_init(t_vector *vector, size_t default_size);
 
 #endif

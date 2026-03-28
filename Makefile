@@ -1,6 +1,6 @@
 NAME := AICu
 
-INCLUDE := coders/
+INCLUDE := includes/
 
 BUILD_DIR := .build
 
@@ -13,6 +13,8 @@ FINCLUDE := -I $(INCLUDE)
 DEPFLAGS := -MMD -MP
 
 SRC_FILES := main.c\
+	parsing.c\
+	vectors.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 DEPS := $(patsubst %.o, %.d, $(OBJ))

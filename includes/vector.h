@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aicu.h                                             :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/28 07:35:48 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 08:06:27 by bfitte           ###   ########lyon.fr   */
+/*   Created: 2026/03/28 07:08:49 by bfitte            #+#    #+#             */
+/*   Updated: 2026/03/28 09:44:40 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AICU_H
-# define AICU_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
-#include <stdint.h>
-#include <fcntl.h>
+# include <stdlib.h>
+
+typedef struct s_vector
+{
+	size_t	element_size;
+	size_t	num_elements;
+	size_t	max_elements;
+	unsigned int	*data;
+}				t_vector;
+
+int		vector_realloc(t_vector *vector);
+int		vector_init(t_vector *vector, size_t default_size);
 
 #endif
