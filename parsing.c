@@ -4,7 +4,7 @@
 
 int	write_error(void)
 {
-	write(1, "ERROR\n", 6);
+	write(2, "ERROR\n", 6);
 	return (-1);
 }
 
@@ -15,22 +15,15 @@ static int	final_check_input(int i, char *nptr)
 	result = 0;
 	if (!(nptr[i] >= 48 && nptr[i] <= 57))
 	{
-		write(1, "mahcin", 6);
 		return (write_error());
 	}
 	while (nptr[i])
 	{
 		if (!(nptr[i] <= 57 && nptr[i] >= 48))
-		{
-			write(1, "truc", 4);
 			return (write_error());
-		}
 		result = (result * 10 + (nptr[i] - 48));
 		if (result > 10000)
-		{
-			write(1, "ko", 2);
 			return (write_error());
-		}
 		i++;
 	}
 	return (result);
