@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 07:10:56 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 11:26:40 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 12:14:12 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	vector_init(t_vector *vector, size_t default_size)
 	vector->element_size = sizeof(unsigned int);
 	vector->max_elements = default_size;
 	vector->num_elements = 0;
+	vector->remain = NULL;
 	vector->data = malloc(sizeof(unsigned int) * default_size);
 	if (vector->data == NULL)
 		return (-1);
