@@ -179,7 +179,7 @@ static inline int	parse_content(t_vector *vec, char *buffer)
 	return (1);
 }
 
-int	read_pro_max(t_vector *vec)
+int	read_pro_max(t_vector *vec, int fd)
 {
 	int	n;
 	char	buffer[4096];
@@ -187,7 +187,7 @@ int	read_pro_max(t_vector *vec)
 	n = 1;
 	while (n > 0)
 	{
-		n = read(0, buffer, 4095);
+		n = read(fd, buffer, 4095);
 		if (n == -1)
 			return (-1);
 		else if (n == 0)
