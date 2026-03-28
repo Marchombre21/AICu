@@ -6,33 +6,36 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 08:01:57 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 10:39:45 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 11:37:31 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "aicu.h"
 #include "vector.h"
 
-static int	final_check_input(int i, char *nptr)
+int	write_error(void)
 {
-	unsigned int	result;
+	write(1, "ERROR\n", 6);
+	return (-1);
+}
 
-	result = 0;
+static int	final_check_input(int i, char *nptr, int result)
+{
 	if (!(nptr[i] >= 48 && nptr[i] <= 57))
-		return (-1);
+		return (write_error());
 	while (nptr[i])
 	{
 		if (!(nptr[i] <= 57 && nptr[i] >= 48))
-			return (-1);
+			return (write_error());
 		result = (result * 10 + (nptr[i] - 48));
 		if (result > 10000)
-			return (-1);
+			return (write_error());
 		i++;
 	}
 	return (result);
 }
 
-static int	check_input(char *nptr)
+static int	check_input(char *nptr, int result)
 {
 	int			i;
 
@@ -42,15 +45,15 @@ static int	check_input(char *nptr)
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
-			return (-1);
+			return (write_error());
 		i++;
 	}
-	return (final_check_input(i, nptr));
+	return (final_check_input(i, nptr, result));
 }
 
 static inline int	parse_content(t_vector *vec, char *buffer)
 {
-	static	int nb_completed;
+	static	char *nb_remain;
 	int	i;
 	int	start;
 	int	res;
@@ -58,29 +61,33 @@ static inline int	parse_content(t_vector *vec, char *buffer)
 	res = 0;
 	i = 0;
 	start = i;
-	nb_completed = 0;
+	nb_remain = 1;
 	while (buffer[i])
 	{
 		if (vec->max_elements == vec->num_elements)
 		{
 			if (vector_realloc(vec) == -1)
-				return (-1);
+				return (write_error());
 		}
 		if (buffer[i] == '\n')
 		{
 			buffer[i] = 0;
-			res = check_input(buffer + start);
+			if (!nb_remain)
+				res = check_input(buffer + start, );
 			if (res == -1)
-				return (-1);
+				return (write_error());
 			vec->data[vec->num_elements] = res;
 			vec->num_elements += 1;
 			start = i + 1;
 		}
 		i++;
 	}
+	if (buffer[i - 1] != '\n')
+		nb_remain = ;
 	return (1);
 }
 
+#include <stdio.h>
 int	read_pro_max(t_vector *vec)
 {
 	int	n;
@@ -90,6 +97,8 @@ int	read_pro_max(t_vector *vec)
 	while (n > 0)
 	{
 		n = read(0, buffer, 4095);
+		printf("result %i\n", n);
+		fflush(stdout);
 		if (n == -1)
 			return (-1);
 		else if (n == 0)

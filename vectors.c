@@ -6,37 +6,31 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 07:10:56 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 09:48:15 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 11:26:40 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "aicu.h"
 #include "vector.h"
 
-static void	ft_intcpy(void *d, const unsigned int *s, size_t n)
+static void ft_intcpy(unsigned int *d, const unsigned int *s, size_t n)
 {
-	const size_t	chunks = n / 8;
-	const size_t	rem = n % 8;
+	const size_t	chunks = n / 2;
+	const size_t	rem = n % 2;
 	const uint64_t	*s64 = (const uint64_t *)s;
-	uint64_t		*d64;
-	unsigned int	*d_uint;
+	uint64_t		*d64 = (uint64_t *)d;
 	size_t			i;
 
-	d64 = (uint64_t *)d;
 	i = 0;
 	while (i < chunks)
 	{
 		d64[i] = s64[i];
 		++i;
 	}
-	d_uint = (unsigned int *)(d64 + chunks);
-	s = (const unsigned int *)(s64 + chunks);
-	i = 0;
-	while (i < rem)
-	{
-		d_uint[i] = s[i];
-		++i;
-	}
+
+	// The remain of a division by 2 is either 1 or 0.
+	if (rem)
+		d[n - 1] = s[n - 1];
 }
 
 int	vector_realloc(t_vector *vector)
@@ -46,8 +40,7 @@ int	vector_realloc(t_vector *vector)
 	new_data = malloc(vector->element_size * vector->max_elements * 2);
 	if (new_data == NULL)
 		return (-1);
-	ft_intcpy(new_data, vector->data,
-		vector->element_size * vector->num_elements);
+	ft_intcpy(new_data, vector->data, vector->num_elements);
 	free(vector->data);
 	vector->data = new_data;
 	vector->max_elements *= 2;
