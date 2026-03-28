@@ -10,7 +10,7 @@ FLAGS := -Wall -Werror -Wextra
 
 FINCLUDE := -I $(INCLUDE)
 
-DEPFLAGS := -MMD -MP
+DEPFLAGS := -MMD -MP -g3
 
 SRC_FILES := main.c\
 	parsing.c\

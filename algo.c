@@ -46,6 +46,21 @@ int is_ok_to_take(int nb_to_take, int heap_size)
     return 1;
 }
 
+
+void get_new_max(t_vector *vec)
+{
+    size_t i;
+
+    i = 0;
+
+    while (i < vec->num_elements)
+    {
+        if (vec->data[i] > (size_t) vec->max)
+            vec->max = vec->data[i];
+        i++;
+    }
+}
+
 void display_heaps(t_vector *vec)
 {
     size_t i;
@@ -58,6 +73,7 @@ void display_heaps(t_vector *vec)
     while (i < vec->num_elements)
     {
         j = 0;
+        k = 0;
 		diff = vec->max - vec->data[i];
 		while (k++ < diff)
 			write(1, " ", 1);
@@ -93,17 +109,14 @@ void	check_entry_user(int input)
 		write(1, "User took 3\n", 12);
 }
 
-void	algo_loop(t_vector *vec)
+void algo_loop(t_vector *vec)
 {
     if (!vec || vec->num_elements == 0)
         return;
 
-    size_t i = vec->num_elements - 1;
-    int turn;
+    int i = vec->num_elements - 1;
+    int turn = 1;
     int nb_to_take;
-
-	nb_to_take = 0;
-    turn = 1;
 
     display_heaps(vec);
     while (i >= 0)
@@ -112,45 +125,33 @@ void	algo_loop(t_vector *vec)
         {
             if (turn == 1)
             {
-				if (vec->num_elements == 1)
-				{
-					if (is_next_heap_winnable(vec->data[i]))
-					{
-						if (is_ok_to_take(nb_to_take, vec->data[i]))
-							nb_to_take = win_move(vec->data[i]);
-					}
-					else
-						nb_to_take = 1;
-					if (is_ok_to_take(nb_to_take, vec->data[i]))
-						vec->data[i] -= nb_to_take;
-					check_input_ia(nb_to_take);
-					turn = 0;
-				}
-                if (is_next_heap_winnable(vec->data[i - 1]))
-                {
-                    if (is_ok_to_take(nb_to_take, vec->data[i]))
-                        nb_to_take = win_move(vec->data[i]);
-                }
+                if (i > 0 && is_next_heap_winnable(vec->data[i - 1]))
+                    nb_to_take = win_move(vec->data[i]);
                 else
                     nb_to_take = 1;
-                if (is_ok_to_take(nb_to_take, vec->data[i]))
-                    vec->data[i] -= nb_to_take;
-				check_input_ia(nb_to_take);
+                
+                vec->data[i] -= nb_to_take;
+                check_input_ia(nb_to_take);
                 turn = 0;
             }
             else
             {
+                ft_putstr("Please choose between 1 and 3 items\n");
                 nb_to_take = read_user(vec->data[i]);
-				if (nb_to_take != -1)
-				{
-					if (is_ok_to_take(nb_to_take, vec->data[i]))
-						vec->data[i] -= nb_to_take;
-					check_entry_user(nb_to_take);
-					turn = 1;
-				}
+                if (nb_to_take == -1)
+                    continue ;
+                
+                vec->data[i] -= nb_to_take;
+                check_entry_user(nb_to_take);
+                turn = 1;
             }
+            get_new_max(vec);
             display_heaps(vec);
         }
+        i--;
     }
-	vec->num_elements -= 1;
+    if (turn == 0)
+        write(1, "You are the winner!\n", 20);
+    else
+        write(1, "AI is the winner!\n", 18);
 }

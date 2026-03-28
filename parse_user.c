@@ -53,8 +53,11 @@ int	read_user(int limit)
 	while(n > 0)
 	{
 		n = read(fd, buffer, 4095);
-		if (n == -1)
+		if (n <= 0)
+		{
+			close(fd);
 			return (-1);
+		}
 		buffer[n] = 0;
 		while (buffer[i] && buffer[i] != '\n')
 			i++;
