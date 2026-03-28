@@ -1,16 +1,17 @@
 
 #include "aicu.h"
+#include <stdio.h>
 
 static int	final_check_input_user(int i, char *nptr, int limit)
 {
 	int	result;
 
 	result = 0;
-	if (!(nptr[i] >= 49 && nptr[i] <= limit))
+	if (!(nptr[i] >= 49 && nptr[i] <= limit + 48))
 		return (-1);
 	while (nptr[i])
 	{
-		if (!(nptr[i] <= 57 && nptr[i] >= 48))
+		if (!(nptr[i] <= 57 && nptr[i] >= 49))
 			return (-1);
 		result = (result * 10 + (nptr[i] - 48));
 		if (result > 3)
@@ -42,27 +43,31 @@ int	read_user(int limit)
 	char	buffer[4096];
 	int		input;
 	int		i;
+	int		fd;
 	int		start;
 
 	i = 0;
 	start = i;
 	n = 1;
+	fd = open("/dev/tty", O_RDONLY);
 	while(n > 0)
 	{
-		n = read(0, buffer, 4095);
+		n = read(fd, buffer, 4095);
 		if (n == -1)
 			return (-1);
 		buffer[n] = 0;
-		while (buffer[i] != '\n')
+		while (buffer[i] && buffer[i] != '\n')
 			i++;
 		buffer[i] = 0;
 		input = check_input_user(buffer, limit);
 		if (input == -1)
 		{
 			write(1, buffer, i + 1);
-			write(1, "- Invalid choice", 16);
+			write(1, " - Invalid choice\n", 18);
+			close(fd);
 			return (-1);
 		}
+		close(fd);
 		return (input);
 	}
 	return (0);
