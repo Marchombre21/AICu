@@ -159,17 +159,14 @@ static inline int	parse_content(t_vector *vec, char *buffer)
 		if (buffer[i] == '\n')
 		{
 			if (start == i)
-				return (1);
+				return (2);
 			buffer[i] = 0;
 			if (vec->remain)
 				res = concat_store(vec, buffer + start);
 			else
 				res = store_datas(vec, buffer + start);
-			// 	res = check_input(buffer + start);
 			if (res == -1)
 				return (-1);
-			// vec->data[vec->num_elements] = res;
-			// vec->num_elements += 1;
 			start = i + 1;
 		}
 		i++;
@@ -183,6 +180,7 @@ int	read_pro_max(t_vector *vec, int fd)
 {
 	int	n;
 	char	buffer[4096];
+	int		parse_status;
 
 	n = 1;
 	while (n > 0)
@@ -193,8 +191,12 @@ int	read_pro_max(t_vector *vec, int fd)
 		else if (n == 0)
 			return (0);
 		buffer[n] = 0;
-		if (parse_content(vec, buffer) == -1)
+
+		parse_status = parse_content(vec, buffer);
+		if (parse_status == -1)
 			return (-1);
+		if (parse_status == 2)
+			return (0);
 	}
 	return (0);
 }
