@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 07:22:34 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 07:52:33 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:19:47 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "vector.h"
 #include <stdint.h>
 
-void	ft_charcpy(char *d, const char *s, size_t n)
+void	ft_intcpy(unsigned int *d, const unsigned int *s, size_t n)
 {
 	const size_t	chunks = n / 8;
 	const size_t	rem = n % 8;
@@ -42,25 +42,25 @@ void	ft_charcpy(char *d, const char *s, size_t n)
 int	read_pro_max(t_vector *vec)
 {
 	unsigned int	n;
-	size_t	parse_cursor;
+	char	buffer[4096];
 
-	parse_cursor = 0;
 	n = 1;
 	while (n > 0)
 	{
-		if (vec->max_elements - vec->num_elements < 10000)
-		{
-			if (vector_realloc(vec) == -1)
-				return (-1);
-		}
-		n = read(0, vec->data + vec->num_elements, 10000 - 1);
+		// if (vec->max_elements - vec->num_elements < 10000)
+		// {
+		// 	if (vector_realloc(vec) == -1)
+		// 		return (-1);
+		// }
+		n = read(0, buffer, 4095);
 		if (n == -1)
 			return (-1);
 		else if (n == 0)
 			return (0);
-		vec->data[vec->num_elements + n] = 0;
-		vec->num_elements += n;
-		parse_content(vec, &parse_cursor);
+		buffer[n] = 0;
+		// vec->num_elements += n;
+		if (parse_content(vec, buffer) == -1)
+			return (-1);
 	}
 	return (0);
 }
