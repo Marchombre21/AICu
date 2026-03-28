@@ -1,24 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/28 07:06:19 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 14:32:29 by bfitte           ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "vector.h"
 #include "aicu.h"
 #include <stdio.h>
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_vector	vec;
 	// size_t	i;
 
+	if (argc > 1)
+	{
+		
+	}
 	vector_init(&vec, 50);
 	if (read_pro_max(&vec) == -1)
 	{

@@ -1,7 +1,7 @@
 
 #include "vector.h"
 
-int is_next_heap_winnable(int heap_size)
+int	is_next_heap_winnable(int heap_size)
 {
     if (heap_size % 4 != 1)
         return 1;
@@ -9,7 +9,7 @@ int is_next_heap_winnable(int heap_size)
 }
 
 
-int win_move(int heap_size)
+int	win_move(int heap_size)
 {
     size_t i;
     int new_heap_size;
@@ -26,14 +26,14 @@ int win_move(int heap_size)
 }
 
 
-int is_heap_empty(int heap_size)
+int	is_heap_empty(int heap_size)
 {
     if (heap_size == 0)
         return 1;
     return -1;
 }
 
-void    algo_loop(t_vector *vec)
+void	algo_loop(t_vector *vec)
 {
     size_t i;
     int nb_to_take;
