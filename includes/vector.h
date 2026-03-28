@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 07:08:49 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 11:54:14 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 15:36:42 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_vector
 	size_t	element_size;
 	size_t	num_elements;
 	size_t	max_elements;
+	int		max;
 	char	*remain;
 	unsigned int	*data;
 }				t_vector;

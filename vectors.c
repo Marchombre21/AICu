@@ -40,6 +40,7 @@ int	vector_init(t_vector *vector, size_t default_size)
 	vector->element_size = sizeof(unsigned int);
 	vector->max_elements = default_size;
 	vector->num_elements = 0;
+	vector->max = 0;
 	vector->remain = NULL;
 	vector->data = malloc(sizeof(unsigned int) * default_size);
 	if (vector->data == NULL)

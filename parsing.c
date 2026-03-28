@@ -22,10 +22,6 @@ static int	final_check_input(int i, char *nptr)
 	{
 		if (!(nptr[i] <= 57 && nptr[i] >= 48))
 		{
-			// if (!nptr[i])
-			// 	write(1, "tred", 4);
-			// printf("%c", nptr[i]);
-			// fflush(stdout);
 			write(1, "truc", 4);
 			return (write_error());
 		}
@@ -122,6 +118,8 @@ int	store_datas(t_vector *vec, char *datas)
 	if (res == -1)
 		return (write_error());
 	vec->data[vec->num_elements] = res;
+	if (vec->max < res)
+		vec->max = res;
 	vec->num_elements += 1;
 	return (1);
 }

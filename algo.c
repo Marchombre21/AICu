@@ -1,4 +1,5 @@
 #include "aicu.h"
+#include <stdio.h>
 
 int	is_next_heap_winnable(int heap_size)
 {
@@ -34,12 +35,18 @@ int is_ok_to_take(int nb_to_take)
 void display_heaps(t_vector *vec)
 {
     size_t i;
-    unsigned int j;
+    unsigned int	j;
+	int				k;
+	int				diff;
 
     i = 0;
+	k = 0;
     while (i < vec->num_elements)
     {
         j = 0;
+		diff = vec->max - vec->data[i];
+		while (k++ < diff)
+			write(1, " ", 1);
         while (j < vec->data[i])
         {
             write(1, "|", 1);
@@ -52,6 +59,26 @@ void display_heaps(t_vector *vec)
     }
 }
 
+void	check_input_ia(int input)
+{
+	if (input == 1)
+		write(1, "AI took 1\n", 10);
+	else if (input == 2)
+		write(1, "AI took 2\n", 10);
+	else if (input == 3)
+		write(1, "AI took 3\n", 10);
+}
+
+void	check_entry_user(int input)
+{
+	if (input == 1)
+		write(1, "User took 1\n", 10);
+	else if (input == 2)
+		write(1, "User took 2\n", 10);
+	else if (input == 3)
+		write(1, "User took 3\n", 10);
+}
+
 void	algo_loop(t_vector *vec)
 {
     if (!vec || vec->num_elements == 0)
@@ -60,7 +87,7 @@ void	algo_loop(t_vector *vec)
     size_t i = vec->num_elements - 1;
     int turn;
     int nb_to_take;
-    char *str_nb_to_take;
+    int	str_nb_to_take;
 
     turn = 1;
 
@@ -68,9 +95,8 @@ void	algo_loop(t_vector *vec)
     while (i > 0)
     {
         i--;
-        while (vec->data[i] > 0)
+        while (vec->data[i + 1] > 0)
         {
-            printf("heap size-> %d\n", vec->data[i + 1]);
             if (turn == 1)
             {
                 if (is_next_heap_winnable(vec->data[i]))
@@ -82,18 +108,17 @@ void	algo_loop(t_vector *vec)
                     nb_to_take = 1;
                 if (is_ok_to_take(nb_to_take))
                     vec->data[i + 1] -= nb_to_take;
-                printf("AI takes %d\n", nb_to_take);
+					check_input_ia(nb_to_take);
                 turn = 0;
             }
             else
             {
-                str_nb_to_take = get_next_line(0);
-                nb_to_take = ft_atoi(str_nb_to_take);
+                str_nb_to_take = read_user(vec->data[vec->num_elements - 1]);
+				if (str_nb_to_take == -1)
+					
                 if (is_ok_to_take(nb_to_take))
                     vec->data[i + 1] -= nb_to_take;
-                printf("User takes %d\n", nb_to_take);
-                // printf("%s", str_nb_to_take);
-                free(str_nb_to_take);
+                check_entry_user(nb_to_take);
                 turn = 1;
             }
             display_heaps(vec);

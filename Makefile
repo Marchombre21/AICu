@@ -15,6 +15,8 @@ DEPFLAGS := -MMD -MP
 SRC_FILES := main.c\
 	parsing.c\
 	vectors.c\
+	algo.c\
+	parse_user.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 DEPS := $(patsubst %.o, %.d, $(OBJ))
