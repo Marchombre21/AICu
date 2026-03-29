@@ -184,14 +184,22 @@ int	read_pro_max(t_vector *vec, int fd)
 		if (n == -1)
 			return (-1);
 		else if (n == 0)
+		{
+			if (vec->num_elements == 0)
+				return (write_error());
 			return (0);
+		}
 		buffer[n] = 0;
 
 		parse_status = parse_content(vec, buffer);
 		if (parse_status == -1)
 			return (-1);
 		if (parse_status == 2)
+		{
+			if (vec->num_elements == 0)
+				return (write_error());
 			return (0);
+		}
 		
 	}
 	return (0);
