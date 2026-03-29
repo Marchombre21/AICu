@@ -13,7 +13,7 @@ static int	final_check_input(int i, char *nptr)
 	int	result;
 
 	result = 0;
-	if (!(nptr[i] >= 48 && nptr[i] <= 57))
+	if (!(nptr[i] >= 49 && nptr[i] <= 57))
 		return (-1);
 	while (nptr[i])
 	{
@@ -192,6 +192,7 @@ int	read_pro_max(t_vector *vec, int fd)
 			return (-1);
 		if (parse_status == 2)
 			return (0);
+		
 	}
 	return (0);
 }

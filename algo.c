@@ -38,7 +38,7 @@ void algo_loop(t_vector *vec)
     i = vec->num_elements - 1;
     turn = 1;
 
-    display_heaps(vec, strategy);
+    display_heaps(vec);
     while (i >= 0)
     {
         while (vec->data[i] > 0)
@@ -66,12 +66,12 @@ void algo_loop(t_vector *vec)
                 turn = 1;
             }
             get_new_max(vec);
-            display_heaps(vec, strategy);
+            display_heaps(vec);
         }
+        vec->num_elements -= 1;
         i--;
     }
     free(strategy);
-
     if (turn == 0)
         ft_putstr("You are the winner!\n", 1);
     else
