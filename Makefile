@@ -18,6 +18,7 @@ SRC_FILES := main.c\
 	parse_user.c\
 	algo.c\
 	algo_utils.c\
+	ft_putnbr_fd.c\
 	display_terminal.c
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
