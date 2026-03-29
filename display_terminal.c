@@ -9,7 +9,7 @@ void get_new_max(t_vector *vec)
 
     while (i < vec->num_elements)
     {
-        if (vec->data[i] > (size_t) vec->max)
+        if (vec->data[i] > vec->max)
             vec->max = vec->data[i];
         i++;
     }
@@ -17,6 +17,7 @@ void get_new_max(t_vector *vec)
 
 void display_heaps(t_vector *vec, int *strategy)
 {
+	(void)strategy;
     size_t i;
     unsigned int	j;
 	int				k;
@@ -38,10 +39,10 @@ void display_heaps(t_vector *vec, int *strategy)
                 write(1, " ", 1);
             j++;
         }
-        if (strategy[i] == 0)
-            ft_putstr("AI wants to win this heap");
-        else
-            ft_putstr("AI wants to lose this heap");
+        // if (strategy[i] == 0)
+        //     ft_putstr("AI wants to win this heap");
+        // else
+        //     ft_putstr("AI wants to lose this heap");
         write(1, "\n", 1);
         i++;
     }

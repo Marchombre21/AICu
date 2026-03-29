@@ -111,8 +111,8 @@ int	store_datas(t_vector *vec, char *datas)
 	if (res == -1)
 		return (write_error());
 	vec->data[vec->num_elements] = res;
-	if (vec->max < res)
-		vec->max = res;
+	if (vec->max < (unsigned int) res)
+		vec->max = (unsigned int) res;
 	vec->num_elements += 1;
 	return (1);
 }

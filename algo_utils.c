@@ -59,7 +59,7 @@ int *get_strategy(t_vector *vec)
     if (!strategy)
         return (NULL);
 
-    strategy[0] = 0; 
+    strategy[0] = 0;
     is_winning_pos = (vec->data[0] % 4 != 1);
 
     i = 1;

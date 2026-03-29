@@ -33,7 +33,7 @@ void algo_loop(t_vector *vec)
 
     strategy = get_strategy(vec);
     if (!strategy)
-        return;
+        return ;
 
     i = vec->num_elements - 1;
     turn = 1;
