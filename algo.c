@@ -4,21 +4,21 @@
 static void	check_input_ia(int input)
 {
 	if (input == 1)
-		write(1, "AI took 1\n", 10);
+		ft_putstr("AI took 1\n", 1);
 	else if (input == 2)
-		write(1, "AI took 2\n", 10);
+		ft_putstr("AI took 2\n", 1);
 	else if (input == 3)
-		write(1, "AI took 3\n", 10);
+		ft_putstr("AI took 3\n", 1);
 }
 
 static void	check_entry_user(int input)
 {
 	if (input == 1)
-		write(1, "User took 1\n", 12);
+		ft_putstr("User took 1\n", 1);
 	else if (input == 2)
-		write(1, "User took 2\n", 12);
+		ft_putstr("User took 2\n", 1);
 	else if (input == 3)
-		write(1, "User took 3\n", 12);
+		ft_putstr("User took 3\n", 1);
 }
 
 void algo_loop(t_vector *vec)
@@ -56,7 +56,7 @@ void algo_loop(t_vector *vec)
             }
             else
             {
-                ft_putstr("Please choose between 1 and 3 items\n");
+                ft_putstr("Please choose between 1 and 3 items\n", 1);
                 nb_to_take = read_user(vec->data[i]);
                 if (nb_to_take == -1)
                     continue;
@@ -73,7 +73,7 @@ void algo_loop(t_vector *vec)
     free(strategy);
 
     if (turn == 0)
-        write(1, "You are the winner!\n", 20);
+        ft_putstr("You are the winner!\n", 1);
     else
-        write(1, "AI is the winner!\n", 18);
+        ft_putstr("AI is the winner!\n", 1);
 }

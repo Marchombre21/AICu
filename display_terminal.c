@@ -31,19 +31,19 @@ void display_heaps(t_vector *vec, int *strategy)
         k = 0;
 		diff = vec->max - vec->data[i];
 		while (k++ < diff)
-			write(1, " ", 1);
+			ft_putstr(" ", 1);
         while (j < vec->data[i])
         {
-            write(1, "|", 1);
+            ft_putstr("|", 1);
             if (j != vec->data[i])
-                write(1, " ", 1);
+                ft_putstr(" ", 1);
             j++;
         }
         // if (strategy[i] == 0)
-        //     ft_putstr("AI wants to win this heap");
+        //     ft_putstr("AI wants to win this heap", 1);
         // else
-        //     ft_putstr("AI wants to lose this heap");
-        write(1, "\n", 1);
+        //     ft_putstr("AI wants to lose this heap", 1);
+        ft_putstr("\n", 1);
         i++;
     }
 }

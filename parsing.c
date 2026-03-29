@@ -4,7 +4,7 @@
 
 int	write_error(void)
 {
-	write(2, "ERROR\n", 6);
+	ft_putstr("ERROR\n", 2);
 	return (-1);
 }
 
@@ -14,16 +14,14 @@ static int	final_check_input(int i, char *nptr)
 
 	result = 0;
 	if (!(nptr[i] >= 48 && nptr[i] <= 57))
-	{
-		return (write_error());
-	}
+		return (-1);
 	while (nptr[i])
 	{
 		if (!(nptr[i] <= 57 && nptr[i] >= 48))
-			return (write_error());
+			return (-1);
 		result = (result * 10 + (nptr[i] - 48));
 		if (result > 10000)
-			return (write_error());
+			return (-1);
 		i++;
 	}
 	return (result);
@@ -39,10 +37,7 @@ static int	check_input(char *nptr)
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
-		{
-			write(1, "ok", 2);
-			return (write_error());
-		}
+			return (-1);
 		i++;
 	}
 	return (final_check_input(i, nptr));
@@ -78,6 +73,8 @@ int	concat_store(t_vector *vec, char *next)
 	while (next[j++])
 		i++;
 	new_str = malloc(sizeof(char) * i + 1);
+	if (!new_str)
+		return (-1);
 	j = -1;
 	i = 0;
 	while (vec->remain[++j])
@@ -91,8 +88,6 @@ int	concat_store(t_vector *vec, char *next)
 	new_str[j] = 0;
 	if (store_datas(vec, new_str) == -1)
 	{
-		free(vec->remain);
-		vec->remain = NULL;
 		free(new_str);
 		return (-1);
 	}
@@ -143,7 +138,8 @@ static inline int	parse_content(t_vector *vec, char *buffer)
 		{
 			if (vector_realloc(vec) == -1)
 			{
-				write(1, "87", 3);
+				free(vec->remain);
+				free(vec->data);
 				return (write_error());
 			}
 		}
@@ -157,13 +153,21 @@ static inline int	parse_content(t_vector *vec, char *buffer)
 			else
 				res = store_datas(vec, buffer + start);
 			if (res == -1)
+			{
+				free(vec->remain);
+				free(vec->data);
 				return (-1);
+			}
 			start = i + 1;
 		}
 		i++;
 	}
 	if (start != i)
-		init_remain(vec, buffer + start, i - start);
+		if (init_remain(vec, buffer + start, i - start) == -1)
+			{
+				free(vec->data);
+				return (-1);
+			}
 	return (1);
 }
 

@@ -13,22 +13,20 @@ int	main(int argc, char **argv)
 	{
 		if (argc > 2)
 		{
-			write(2, "Too much arguments!\n", 20);
+			ft_putstr("Too much arguments!\n", 2);
 			return (1);
 		}
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 		{
-			write(2, "An error occurs with the file's path\n", 37);
+			ft_putstr("An error occurs with the file's path\n", 2);
 			return (1);
 		}
 	}
-	vector_init(&vec, 50);
-	if (read_pro_max(&vec, fd) == -1)
-	{
-		printf("%i", vec.data[vec.num_elements - 1]);
+	if (vector_init(&vec, 50) == -1)
 		return (1);
-	}
+	if (read_pro_max(&vec, fd) == -1)
+		return (1);
 	close(fd);
 	algo_loop(&vec);
 	// i = 0;

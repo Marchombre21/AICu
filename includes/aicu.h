@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aicu.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aluslu <aluslu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 07:35:48 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/28 22:20:06 by aluslu           ###   ########.fr       */
+/*   Updated: 2026/03/29 07:51:23 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int     win_move(int heap_size);
 int     lose_move(int heap_size);
 int		read_user(int limit);
 void	algo_loop(t_vector *vec);
-void    ft_putstr(char *s);
+void    ft_putstr(char *s, int fd);
 void    display_heaps(t_vector *vec, int *strategy);
 void    get_new_max(t_vector *vec);
 

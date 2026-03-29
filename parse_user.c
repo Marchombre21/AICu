@@ -63,8 +63,8 @@ int	read_user(int limit)
 		input = check_input_user(buffer, limit);
 		if (input == -1)
 		{
-			write(1, buffer, i + 1);
-			write(1, " - Invalid choice\n", 18);
+			ft_putstr(buffer, 1);
+			ft_putstr(" - Invalid choice\n", 1);
 			close(fd);
 			return (-1);
 		}
