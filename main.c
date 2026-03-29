@@ -8,11 +8,14 @@ int	main(int argc, char **argv)
 {
 	t_vector	vec;
 	t_data		img;
+	t_panel		panel;
 	int			fd;
 	void		*mlx;
 	void		*mlx_win;
 	int			screen_width;
 	int			screen_height;
+	unsigned int			diff;
+	int			radius;
 	// int			x;
 	// int			y;
 
@@ -31,20 +34,15 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 	}
-	mlx = mlx_init();
-	mlx_get_screen_size(mlx, &screen_width, &screen_height);
-	mlx_win = mlx_new_window(mlx, screen_width / 2, screen_height / 2, "AICu");
-	img.img = mlx_new_image(mlx, screen_width / 2, screen_height / 2);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	// y = 5;
 	// while (y < 55)
 	// {
-	// 	x = 5;
-	// 	while (x < 55)
-	// 	{
-	// 		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
-	// 		x++;
-	// 	}
+		// 	x = 5;
+		// 	while (x < 55)
+		// 	{
+			// 		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
+			// 		x++;
+			// 	}
 	// 	y++;
 	// }
 	if (vector_init(&vec, 50) == -1)
@@ -52,15 +50,29 @@ int	main(int argc, char **argv)
 	if (read_pro_max(&vec, fd) == -1)
 	return (1);
 	close(fd);
-	img.marbles = malloc(sizeof(int) * vec.num_elements);
-	if (!img.marbles)
-		return (1);
-	for (int i = vec.num_elements; i > 0; i--)
+	mlx = mlx_init();
+	mlx_get_screen_size(mlx, &screen_width, &screen_height);
+	radius = screen_width * (3 / 4) / 16;
+	mlx_win = mlx_new_window(mlx, screen_width, screen_height, "AICu");
+	img.img = mlx_new_image(mlx, screen_width * (3 / 4), screen_height);
+	panel.panel = mlx_new_image(mlx, screen_width * (1 / 4), screen_height);
+	panel.addr = mlx_get_data_addr(panel.panel, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+
+	for (size_t i = 0; i < vec.num_elements; i++)
 	{
-		img.marbles[i] = malloc(sizeof(int) * vec.data[i - 1]);
-		if (!img.marbles[i])
+		diff = vec.max - vec.data[i];
+		for (unsigned int j = 0; j < vec.data[i]; j++)
 		{
-			
+			unsigned int	k = 0;
+			int				offset;
+
+			offset = 0;
+			while (k < diff / 2)
+				k++;
+			if (diff % 2 != 0)
+				offset = radius;
+			draw_circle(&img, ((j + k) * radius * 2) + radius + 10 + offset, (i * radius * 2) + radius + 10, radius, 0x0000FF00, screen_width / 2, screen_height / 2);
 		}
 	}
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
