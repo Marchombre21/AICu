@@ -1,5 +1,7 @@
 #include "aicu.h"
 
+
+
 void ft_putstr(char *s, int fd)
 {
     size_t i;

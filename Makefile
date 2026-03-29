@@ -23,6 +23,8 @@ SRC_FILES := main.c\
 	algo.c\
 	algo_utils.c\
 	display_terminal.c\
+	mlx_display.c\
+	hooks.c\
 	image_utils.c
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
