@@ -40,9 +40,7 @@ int lose_move(int heap_size)
             return i;
         i++;
     }
-    if (heap_size >= 3)
-        return (3);
-    return (heap_size);
+    return (1);
 }
 
 
