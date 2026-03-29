@@ -41,19 +41,21 @@ void draw_circle(t_data *img, int x_center, int y_center, int radius, int color,
 	}
 }
 
-// void	draw_buttons(t_panel panel, int width, int height)
-// {
-// 	int	offset_x;
-// 	int	offset_y;
-// 	int	x;
-// 	int	y;
+void	draw_buttons(t_panel panel, int width, int height)
+{
+	int	offset_x;
+	int	offset_y;
+	int	x;
+	int	y;
+	int	button_height;
 
-// 	offset_x = width * 0.1;
-// 	offset_y = (height / 3) / 2;
-// 	for (x = 0; x < width - offset_x; x++)
-// 	{
-// 		for (y = 0; y < )
+	offset_x = width * 0.1;
+	offset_y = (height / 3) / 2;
+	butt
+	for (x = 0; x < width - offset_x; x++)
+	{
+		for (y = 0; y < )
 
-// 	}
+	}
 
-// }
+}

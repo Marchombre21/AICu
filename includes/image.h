@@ -9,13 +9,13 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-// typedef struct	s_panel {
-// 	void	*panel;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }				t_panel;
+typedef struct	s_panel {
+	void	*panel;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_panel;
 
 // typedef struct	s_marble {
 // 	void	*marble;
