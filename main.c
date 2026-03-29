@@ -6,7 +6,6 @@ int	main(int argc, char **argv)
 {
 	t_vector	vec;
 	int			fd;
-	// size_t	i;
 
 	fd = 0;
 	if (argc > 1)
@@ -29,12 +28,6 @@ int	main(int argc, char **argv)
 		return (1);
 	close(fd);
 	algo_loop(&vec);
-	// i = 0;
-	// while (i < vec.num_elements)
-	// {
-	// 	printf("%u\n", vec.data[i]);
-	// 	i++;
-	// }
 	free(vec.data);
 	
 	return (0);

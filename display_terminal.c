@@ -18,12 +18,12 @@ void get_new_max(t_vector *vec)
 void display_heaps(t_vector *vec)
 {
     int i;
-    int	j;
-	int				k;
-	int				diff;
-    int             limit;
-    int             height_limit;
-    int             remaining_heaps = 0;
+    int j;
+	int k;
+	int diff;
+    int limit;
+    int height_limit;
+    int remaining_heaps = 0;
 
     i = 0;
 	k = 0;

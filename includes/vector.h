@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: aluslu <aluslu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 07:08:49 by bfitte            #+#    #+#             */
-/*   Updated: 2026/03/29 07:03:21 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/03/29 17:30:43 by aluslu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 typedef struct s_vector
 {
-	size_t	element_size;
-	size_t	num_elements;
-	size_t	max_elements;
-	unsigned int		max;
-	char	*remain;
+	size_t			element_size;
+	size_t			num_elements;
+	size_t			max_elements;
+	unsigned int	max;
+	char			*remain;
 	unsigned int	*data;
 }				t_vector;
 

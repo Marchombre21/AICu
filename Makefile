@@ -10,7 +10,7 @@ FLAGS := -Wall -Werror -Wextra
 
 FINCLUDE := -I $(INCLUDE)
 
-DEPFLAGS := -MMD -MP -g3
+DEPFLAGS := -MMD -MP
 
 SRC_FILES := main.c\
 	vectors.c\

@@ -53,6 +53,7 @@ int	read_user(int limit)
 		n = read(fd, buffer, 4095);
 		if (n <= 0)
 		{
+			ft_putstr("Choose something please!\n", 1);
 			close(fd);
 			return (-1);
 		}
