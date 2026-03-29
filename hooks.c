@@ -12,6 +12,10 @@ int	key_hook(int keycode, t_vars *vars)
 {
     (void) keycode;
     (void) vars;
-	ft_putnbr(keycode);
+	if (keycode == 113)
+    {
+        mlx_destroy_window(vars->mlx, vars->win);
+        exit(0);
+    }
 	return (0);
 }

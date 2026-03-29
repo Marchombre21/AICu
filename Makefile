@@ -25,7 +25,8 @@ SRC_FILES := main.c\
 	display_terminal.c\
 	mlx_display.c\
 	hooks.c\
-	image_utils.c
+	image_utils.c\
+	ft_putnbr_fd.c
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 DEPS := $(patsubst %.o, %.d, $(OBJ))
